@@ -1,0 +1,722 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en">
+
+<head profile="http://gmpg.org/xfn/11">
+<meta content="风雪之隅" name="application-name" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta content="name=PHP源码分析;action-uri=/php-internal;icon-uri=/favicon.ico" name="msapplication-task" />
+<meta content="name=PHP应用;action-uri=/php;icon-uri=/favicon.ico" name="msapplication-task" />
+<meta content="name=JS和CSS;action-uri=/jscss;icon-uri=/favicon.ico" name="msapplication-task" />
+<meta content="name=作者随笔;action-uri=/notes;icon-uri=/favicon.ico" name="msapplication-task" />
+<meta content="name=版权声明;action-uri=/licence;icon-uri=/favicon.ico" name="msapplication-task" />
+<title>图片上传即时显示缩略图解决方法 | 风雪之隅</title>
+<link rel="stylesheet" href="http://www.laruence.com/wp-content/themes/googlechrome/blueprint/screen.css" type="text/css" media="screen, projection" />
+<link rel="stylesheet" href="http://www.laruence.com/wp-content/themes/googlechrome/style.css" type="text/css" media="screen, projection" />
+<link rel="stylesheet" href="http://www.laruence.com/wp-content/themes/googlechrome/blueprint/print.css" type="text/css" media="print" />
+<!--[if IE]><link rel="stylesheet" href="http://www.laruence.com/wp-content/themes/googlechrome/blueprint/ie.css" type="text/css" media="screen, projection" /><![endif]-->
+<!--[if lte IE 6]>
+<style>
+.span-16 {width:610px;}
+#profile {overflow: visible;}
+#meme {position:absolute;}
+</style>
+<![endif]-->
+<link rel="pingback" href="http://www.laruence.com/xmlrpc.php" />
+<link rel="alternate" type="application/rss+xml" title="风雪之隅 &raquo; Feed" href="http://www.laruence.com/feed" />
+<link rel="alternate" type="application/rss+xml" title="风雪之隅 &raquo; Comments Feed" href="http://www.laruence.com/comments/feed" />
+<link rel="alternate" type="application/rss+xml" title="风雪之隅 &raquo; 图片上传即时显示缩略图解决方法 Comments Feed" href="http://www.laruence.com/2009/05/06/758.html/feed" />
+<link rel='stylesheet' id='subscribe_me-css'  href='http://www.laruence.com/wp-content/plugins/sem-subscribe-me/css/styles.css?ver=20090903' type='text/css' media='all' />
+<script type='text/javascript' src='http://www.laruence.com/wp-includes/js/l10n.js?ver=20101110'></script>
+<script type='text/javascript' src='http://www.laruence.com/wp-includes/js/jquery/jquery.js?ver=1.4.4'></script>
+<script type='text/javascript' src='http://www.laruence.com/wp-includes/js/comment-reply.js?ver=20090102'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.laruence.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.laruence.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='index' title='风雪之隅' href='http://www.laruence.com' />
+<link rel='start' title='VIM中文乱码解决方案' href='http://www.laruence.com/2007/10/03/5.html' />
+<link rel='prev' title='使用CSS实现圈人效果(CSS Sprites)' href='http://www.laruence.com/2009/05/05/740.html' />
+<link rel='next' title='东方时尚约车脚本(greaseMoney)' href='http://www.laruence.com/2009/05/10/786.html' />
+<meta name="generator" content="WordPress 3.1.2" />
+<link rel='shortlink' href='http://www.laruence.com/?p=758' />
+
+<!-- All in One SEO Pack 1.6.13.2 by Michael Torbert of Semper Fi Web Design[871,946] -->
+<meta name="description" content="做互联网, 就一定要多用新的互联网产品, 遇到好玩的, 要主动去思考如何实现, 这样才能一直保证你自己的良好的互联网应用的sense. 嘿嘿, 题外话一句. 昨天玩开心网的图片上传, 不得不说, 开心网的细节做的很好. 之前在前公司的时候, 高管干扰UE, 干涉产品的设计细节, 出来的产品, 一个比一个难看, 一个比一个土鳖. 搞得开发都不想做, 以至于一段时间, 我们开发工程师会去修缮UE设计的细节. 真不明白, 没有一点互联网应用美感和sense的猪头高管, 怎么会对自己的审美那么的自信.... 玩死自己没关系 , 玩死了公司, 你内疚不? 唉, 题外话二.. 细节决定成败! 恩, 回到正题, 看到了开心网的, 本地客户端检测图片格式, 和即时显示缩略图功能, 发现在chrome, firefox3, IE8下都不能显示缩略图, 可是我可爱的Eve一直坚持是可以的, 经过研究测试, 找到了在firefox3 , IE8下可以使用的方法." />
+<meta name="keywords" content="js缩略图" />
+<link rel="canonical" href="http://www.laruence.com/2009/05/06/758.html" />
+<!-- /all in one seo pack -->
+<script type="text/javascript" src="http://www.laruence.com/wp-content/plugins/shjs-syntax-hiliter/shjs/sh_main.js"></script><link type="text/css" rel="stylesheet" href="http://www.laruence.com/wp-content/plugins/shjs-syntax-hiliter/shjs/css/sh_ir_black.css">	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+</head>
+<body class="single single-post postid-758 single-format-standard">
+<div class="wrapper">
+<div class='container'>
+  
+	<div class='headermenu span-24'>
+        <ul>
+		<li class="first" id="firstcurrent"><a href="http://www.laruence.com" title="Home">Home</a></li>
+			        <li
+			>
+            <a href="http://www.laruence.com/php-internal" title="PHP源码分析">PHP源码分析</a></li>
+
+			        <li
+			>
+            <a href="http://www.laruence.com/php" title="PHP应用">PHP应用</a></li>
+
+			        <li
+			>
+            <a href="http://www.laruence.com/jscss" title="JS/CSS">JS/CSS</a></li>
+
+			        <li
+			>
+            <a href="http://www.laruence.com/notes" title="随笔">随笔</a></li>
+
+			        <li
+			>
+            <a href="http://www.laruence.com/guestbook" title="留言">留言</a></li>
+
+			        <li
+			 class="last">
+            <a href="http://www.laruence.com/licence" title="博客声明">博客声明</a></li>
+
+		        </ul>
+	</div>
+  
+    <div class='header span-24'>
+        <div class="alignright" style="width:310px">
+			<div id="searchbox">
+            <form method="get" id="searchform" action="http://www.laruence.com/">
+			<input type="text" name="s" id="s" class="search_input" value="" />
+			<input type="image" src="http://www.laruence.com/wp-content/themes/googlechrome/images/transparent.gif" id="searchsubmit" />
+			</form>
+            </div>
+	        <a class="menubookmark" href="http://www.addthis.com/bookmark.php" title="Bookmark and Share"></a>
+            <a class="menufeed" href="http://www.laruence.com/feed" title="Subscribe Feed"></a>
+        </div>
+        <a class="menuhome" href="http://www.laruence.com" title="Home"></a>&nbsp;
+		<span class="blogtitle"><a href="http://www.laruence.com" title="Home">风雪之隅</a></span>
+	</div>
+    
+    <div class='msgbartop span-24'><img src="http://www.laruence.com/wp-content/themes/googlechrome/images/msgbartop.gif" alt="msgbartop" /></div>
+    <div class='msgbar span-24'>
+		PHP语言, PHP扩展, Zend引擎相关的研究,技术,新闻分享 &#8211; 左手代码 右手诗    </div>
+    <div class='msgbarbottom span-24'><img src="http://www.laruence.com/wp-content/themes/googlechrome/images/msgbarbottom.gif" alt="msgbarbottom" /></div>
+    
+    <div class='content span-16'>
+           			<div class="post-758 post type-post status-publish format-standard hentry category-jscss tag-js" id="post-758">
+                <h1>06 May 09 <a href="http://www.laruence.com/2009/05/06/758.html" rel="bookmark" title="Permanent Link to 图片上传即时显示缩略图解决方法">图片上传即时显示缩略图解决方法</a> <g:plusone size="small" href="http://www.laruence.com/2009/05/06/758.html"></g:plusone></h1>       
+                <div class="copyright">
+<ul>
+<li>作者: <a href="http://www.laruence.com">Laruence</a>(<a href="http://www.twitter.com/laruence" target="meme" title="Twitter"><img src="/images/ico-twitter.png" /></a> <a href="http://t.sina.com/laruence" target="meme" title="新浪微博"><img src="/images/ico-sina.png" /></a> <a href="http://fusion.google.com/add?feedurl=http://www.laruence.com/feed" target="meme" title="Google阅读器"><img src="/images/ico-google.png" /></a> <a href="mailto:laruence@yahoo.com.cn" target="meme" title="邮件"><img src="/images/ico-mail.png" /></a>)</li>
+<li>本文地址: <a href="http://www.laruence.com/2009/05/06/758.html" title="Permanet Link to 图片上传即时显示缩略图解决方法">http://www.laruence.com/2009/05/06/758.html</a></li>
+</li>
+<li>转载请注明出处 </li>
+</ul></div>
+<p><script type='text/javascript' src='http://laruence-wordpress.stor.sinaapp.com/uploads/PicPreview.js'></script><br />
+<script language="javascript" type="text/javascript">
+	 var allowExt = ['jpg', 'gif', 'bmp', 'png', 'jpeg'];
+	 var preivew = function(file, container){
+		 try{
+			var pic =  new Picture(file, container);
+		 }catch(e){
+			 alert(e);
+		 }
+	 }
+</script></p>
+<p>
+   做互联网, 就一定要多用新的互联网产品, 遇到好玩的, 要主动去思考如何实现, 这样才能一直保证你自己的良好的互联网应用的sense. 嘿嘿, 题外话一句.</p>
+<p>   昨天玩开心网的图片上传, 不得不说, 开心网的细节做的很好. </p>
+<p>   之前在前公司的时候, 高管干扰UE, 干涉产品的设计细节, 出来的产品, 一个比一个难看, 一个比一个土鳖. 搞得开发都不想做, 以至于一段时间, 我们开发工程师会去修缮UE设计的细节.</p>
+<p>   真不明白, 没有一点互联网应用美感和sense的&#8221;猪头&#8221;高管, 怎么会对自己的&#8221;审美&#8221;那么的自信&#8230;. 玩死自己没关系 , 玩死了公司, 你内疚不?  唉, 题外话二..  细节决定成败!</p>
+<p>   恩, 回到正题, 看到了开心网的, 本地客户端检测图片格式, 和即时显示缩略图功能, 发现在chrome, firefox3, IE8下都不能显示缩略图, 可是我可爱的Eve一直坚持是可以的, 经过研究测试, 找到了在firefox3 , IE8下可以使用的方法.</p>
+<p>   效果如下:
+   </p>
+<div class='previewDemo'>
+<input id="file" type="file" onchange="preivew(this, document.getElementById('img'));">
+	<img id="img"  style="visibility:hidden" height="100px" width="100px">
+</div>
+</p>
+<p>     一个独立的例子,看<a href='/wp-content/uploads/previewDemo.html' target='_blank'>这里</a></p>
+<pre name="code" class="sh_shell" linenum="off">
+   PS: chrome是webkit核心, 如果大家谁知道对于Webkit核心的浏览器, 如何获得file input的full path的方法, 一定告诉我.
+
+   另外, IE8还和一个安全设置有关系&quot;文件上传的时候是否告诉服务器文件路径&quot;, 如果大家有更好的办法, 也一并告诉我.
+</pre>
+</p>
+<p>
+   Firefox3不支持通过value来获取文件全路径, FireFox3中引入了一个新的接口用来解决这个问题，那就是nsIDOMFile，它专门被用来从客户端的input type=&#8221;file&#8221;的控件中获取文件数据，这样就可以将本地的文件保存到服务器上。这是一个非常好的解决办法，以至于我们在FireFox3中开发这样的应用程序时比先前简单获取value值然后再通过服务器端代码上传文件要简单许多，</p>
+<p>   具体可以参看这里: <a href="https://developer.mozilla.org/en/nsIDOMFile" target="_blank">nsiDOMFile</a>
+</p>
+<p><script type="text/javascript" src="http://www.laruence.com/wp-content/plugins/shjs-syntax-hiliter/shjs/lang/sh_shell.js"></script></p>
+<br /><div style='float:left'><!-- Baidu Button BEGIN -->
+    <div id="bdshare" class="bdshare_t bds_tools get-codes-bdshare">
+        <span class="bds_more">分享到：</span>
+        <a class="bds_qzone"></a>
+        <a class="bds_tsina"></a>
+        <a class="bds_tqq"></a>
+        <a class="bds_renren"></a>
+		<a class="shareCount"></a>
+    </div>
+<script type="text/javascript" id="bdshare_js" data="type=tools&uid=375788" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+	document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?t=" + new Date().getHours();
+</script>
+<!-- Baidu Button END --></div><br /><br /><br /><h2  class="related_post_title">Random Posts:</h2><ul class="related_post"><li><a href="http://www.laruence.com/2011/12/30/2435.html" title="PHP数组的Hash冲突实例">PHP数组的Hash冲突实例</a></li><li><a href="http://www.laruence.com/2008/11/07/586.html" title="深入理解PHP原理之文件上传">深入理解PHP原理之文件上传</a></li><li><a href="http://www.laruence.com/2013/08/15/2913.html" title="Weibo LAMP演变 &#8211; 6月在上海分享的PPT">Weibo LAMP演变 &#8211; 6月在上海分享的PPT</a></li><li><a href="http://www.laruence.com/2010/06/20/1602.html" title="深入理解PHP之匿名函数">深入理解PHP之匿名函数</a></li><li><a href="http://www.laruence.com/2008/08/24/377.html" title="PHP源码分析之Global关键字">PHP源码分析之Global关键字</a></li><li><a href="http://www.laruence.com/2009/05/14/803.html" title="浏览器的结构">浏览器的结构</a></li><li><a href="http://www.laruence.com/2010/12/08/1716.html" title="如何获取一个变量的名字">如何获取一个变量的名字</a></li><li><a href="http://www.laruence.com/2010/05/24/1515.html" title="shell下发推脚本">shell下发推脚本</a></li><li><a href="http://www.laruence.com/2011/12/19/2399.html" title="关于PHP浮点数你应该知道的(All &#8216;bogus&#8217; about the float in PHP)">关于PHP浮点数你应该知道的(All &#8216;bogus&#8217; about the float in PHP)</a></li><li><a href="http://www.laruence.com/2012/02/02/2515.html" title="我们什么时候应该使用异常?">我们什么时候应该使用异常?</a></li></ul>                                                <p>Tags: <a href="http://www.laruence.com/tag/js%e7%bc%a9%e7%95%a5%e5%9b%be" rel="tag">js缩略图</a></p>                                <div style="clear:both;"></div>
+                <div class="postmeta">Filed in <a href="http://www.laruence.com/category/jscss" title="View all posts in Js/CSS" rel="category tag">Js/CSS</a> </div>
+			</div>                
+
+            <div class="navigation">
+                <div class="alignleft">&laquo; <a href="http://www.laruence.com/2009/05/05/740.html" rel="prev">使用CSS实现圈人效果(CSS Sprites)</a></div>
+                <div class="alignright"><a href="http://www.laruence.com/2009/05/10/786.html" rel="next">东方时尚约车脚本(greaseMoney)</a> &raquo;</div>
+            </div>
+
+			
+<!-- You can start editing here. Mark for searching comment -->
+
+	<h3 id="comments">28 Responses to &#8220;图片上传即时显示缩略图解决方法&#8221;</h3>
+
+	<!-- Comment page numbers -->
+		<!-- End comment page numbers -->
+
+	<ol class="commentlist" style="list-style-type: none;">
+
+	
+		<li class="alt" id="comment-209559">
+	        <img alt='' src='http://www.gravatar.com/avatar/9e52e748f51a5ee935f1b1882e2fe87f?s=32&amp;d=http%3A%2F%2Fwww.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G' class='avatar avatar-32 photo' height='32' width='32' />			<span title="120.52.18.*">zyx</span> | <small class="commentmetadata">15 Nov 2016 16:28</a> </small>
+			
+			<p>可以用Html5实现</p>
+		</li>
+
+	
+	
+		<li id="comment-4005">
+	        <img alt='' src='http://www.gravatar.com/avatar/60fc9f611b27632b427dbcebe2171585?s=32&amp;d=http%3A%2F%2Fwww.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G' class='avatar avatar-32 photo' height='32' width='32' />			<span title="183.15.159.*">雷神</span> | <small class="commentmetadata">24 Mar 2011 15:29</a> </small>
+			
+			<p>经过验证此文章中的代码在chrome 10.0.648.6版本中失效。chrome这点比其他浏览器安全点</p>
+		</li>
+
+	
+	
+		<li class="alt" id="comment-3508">
+	        <img alt='' src='http://www.gravatar.com/avatar/69a60be8a84bf33b02fc59b52563fb46?s=32&amp;d=http%3A%2F%2Fwww.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G' class='avatar avatar-32 photo' height='32' width='32' />			<span title="121.229.84.*">Channel Magnets</span> | <small class="commentmetadata">10 Dec 2010 15:32</a> </small>
+			
+			<p>悬吊<a href="http://www.sensmag.com/products_27_Channel Magnets.html" rel="nofollow">Channel Magnets</a>地球仪 眼界超越局限尽在掌握,悬吊磁铁地球仪,仅仅是材质的变化,<a href="http://www.sensmag.com/products_33_Sensors Magnets.html" rel="nofollow">Sensors Magnets</a>就把地球仪的呆板一扫而空;深灰的金属色,富有时尚触觉。 <a href="http://www.sensmag.com/products_28_Other Magnetic Assembly.html" rel="nofollow">Other Magnetic Assembly</a>它可以通过磁铁吸附,挂在墙上成为立体的球型壁画,悬吊在天花板上作为装饰,或者只是简单摆放在桌上。<a href="http://www.shendayumei.cn" rel="nofollow">美白</a>重要的是,无论何时何地;桃皮绒销量不减 ,寒意日渐袭人,这一季适用于制作成夹克衫、<a href="http://www.intrade55.com" rel="nofollow">Nike air max</a>、休闲装的面料在市场上销量一直是相当不错,商家忙碌着向工厂下订单、<a href="http://www.intrade55.com" rel="nofollow">puma shoes</a>做货样、催出货。<a href="http://www.intrade55.com" rel="nofollow">cheap handbags</a>无论是内销订单,还是外贸订货,<a href="http://www.shendayumei.cn" rel="nofollow">护肤</a>桃皮绒在近期的盛泽市场上有其一定的地位,尤其深受东欧地区的客商喜欢。</p>
+		</li>
+
+	
+	
+		<li id="comment-2983">
+	        <img alt='' src='http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=32' class='avatar avatar-32 photo avatar-default' height='32' width='32' />			<span title="120.7.183.*">wclssdn</span> | <small class="commentmetadata">26 Jul 2010 01:54</a> </small>
+			
+			<p>我是IE8 &#8230; 难道不支持ie8? </p>
+<p>我也实现过类似的.. 不过也是上传后.. 返回地址.. 显示缩略图的&#8230; </p>
+<p>但是不会存在垃圾文件..  我存了个标志在session中.. 呵呵..  </p>
+<p>希望早日找到更更好的办法..</p>
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2347">
+	        <img alt='' src='http://www.gravatar.com/avatar/ac137cc96f5629a23d963e666615c15b?s=32&amp;d=http%3A%2F%2Fwww.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G' class='avatar avatar-32 photo' height='32' width='32' />			<span title="211.142.12.*"><a href='http://www.ayang23.com' rel='external nofollow' class='url'>Anonymous</a></span> | <small class="commentmetadata">02 Dec 2009 08:55</a> </small>
+			
+			<p>佩服，现学现用了，希望作者不要介意。</p>
+		</li>
+
+	
+	
+		<li id="comment-2132">
+	        <img alt='' src='http://www.gravatar.com/avatar/ae3a88b525fb6e4c0ce0c4a3401b14c0?s=32&amp;d=http%3A%2F%2Fwww.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G' class='avatar avatar-32 photo' height='32' width='32' />			<span title="218.28.30.*">zhj</span> | <small class="commentmetadata">14 Aug 2009 11:06</a> </small>
+			
+			<p>那我拜你为师吧~~以后有机会一定请你喝酒~~二锅头</p>
+		</li>
+
+	
+	
+		<li class="alt" id="comment-2130">
+	        <img alt='' src='http://www.gravatar.com/avatar/1069e488bedd1507ae86a217e5e4d3bd?s=32&amp;d=http%3A%2F%2Fwww.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G' class='avatar avatar-32 photo' height='32' width='32' />			<span title="61.135.165.*"><a href='http://www.laruence.com' rel='external nofollow' class='url'>雪候鸟</a></span> | <small class="commentmetadata">13 Aug 2009 20:07</a> </small>
+			
+			<p>你可以选择请我吃饭, 或者请我喝酒, 嘿嘿</p>
+		</li>
+
+	
+	
+		<li id="comment-2126">
+	        <img alt='' src='http://www.gravatar.com/avatar/ae3a88b525fb6e4c0ce0c4a3401b14c0?s=32&amp;d=http%3A%2F%2Fwww.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G' class='avatar avatar-32 photo' height='32' width='32' />			<span title="218.28.30.*">zhj</span> | <small class="commentmetadata">13 Aug 2009 11:39</a> </small>
+			
+			<p>额的神啊~~该怎么感谢你啊~~</p>
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1754">
+	        <img alt='' src='http://www.gravatar.com/avatar/1069e488bedd1507ae86a217e5e4d3bd?s=32&amp;d=http%3A%2F%2Fwww.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G' class='avatar avatar-32 photo' height='32' width='32' />			<span title="61.135.165.*"><a href='http://www.laruence.com' rel='external nofollow' class='url'>雪候鸟</a></span> | <small class="commentmetadata">22 May 2009 11:55</a> </small>
+			
+			<p>恩,IE下有个安全选项问题&#8230;</p>
+		</li>
+
+	
+	
+		<li id="comment-1752">
+	        <img alt='' src='http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=32' class='avatar avatar-32 photo avatar-default' height='32' width='32' />			<span title="116.28.76.*">Anonymous</span> | <small class="commentmetadata">21 May 2009 18:30</a> </small>
+			
+			<p>IE7下图片只显示路径，不显示图片</p>
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1744">
+	        <img alt='' src='http://www.gravatar.com/avatar/1069e488bedd1507ae86a217e5e4d3bd?s=32&amp;d=http%3A%2F%2Fwww.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G' class='avatar avatar-32 photo' height='32' width='32' />			<span title="125.34.40.*"><a href='http://www.laruence.com' rel='external nofollow' class='url'>雪候鸟</a></span> | <small class="commentmetadata">18 May 2009 22:21</a> </small>
+			
+			<p>你再仔细看看? 呵呵</p>
+		</li>
+
+	
+	
+		<li id="comment-1743">
+	        <img alt='' src='http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=32' class='avatar avatar-32 photo avatar-default' height='32' width='32' />			<span title="58.31.8.*"><a href='http://www.skiyo.cn' rel='external nofollow' class='url'>Jessica</a></span> | <small class="commentmetadata">18 May 2009 21:42</a> </small>
+			
+			<p>像我这种用户点完预览就就提交了..不知道你JS给服务器提交到一半怎么处理..我想的只有加重服务器负担.</p>
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1742">
+	        <img alt='' src='http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=32' class='avatar avatar-32 photo avatar-default' height='32' width='32' />			<span title="58.31.8.*"><a href='http://www.skiyo.cn' rel='external nofollow' class='url'>Jessica</a></span> | <small class="commentmetadata">18 May 2009 21:41</a> </small>
+			
+			<p>汗..说了这么多不就是一句<br />
+document.getElementById(&#8216;file&#8217;).value</p>
+		</li>
+
+	
+	
+		<li id="comment-1726">
+	        <img alt='' src='http://www.gravatar.com/avatar/4e86d711a357bb12a318321d0584320e?s=32&amp;d=http%3A%2F%2Fwww.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G' class='avatar avatar-32 photo' height='32' width='32' />			<span title="122.102.5.*">flykobe</span> | <small class="commentmetadata">14 May 2009 09:36</a> </small>
+			
+			<p>原来用的是data url！<br />
+以前一直看图片预览，都没弄明白！多谢多谢！</p>
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1714">
+	        <img alt='' src='http://www.gravatar.com/avatar/1069e488bedd1507ae86a217e5e4d3bd?s=32&amp;d=http%3A%2F%2Fwww.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G' class='avatar avatar-32 photo' height='32' width='32' />			<span title="61.135.165.*"><a href='http://www.laruence.com' rel='external nofollow' class='url'>雪候鸟</a></span> | <small class="commentmetadata">12 May 2009 11:05</a> </small>
+			
+			<p>恩, 这个方法比较狠..</p>
+		</li>
+
+	
+	
+		<li id="comment-1713">
+	        <img alt='' src='http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=32' class='avatar avatar-32 photo avatar-default' height='32' width='32' />			<span title="121.0.29.*">weimade</span> | <small class="commentmetadata">12 May 2009 10:55</a> </small>
+			
+			<p>以前我们公司弄了一个好玩的办法..</p>
+<p>当用户选择图片之后,直接用JS就把图片给传到服务器上了.<br />
+然后就不管他什么浏览器了.</p>
+<p>所谓的预览,就成功了.</p>
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1694">
+	        <img alt='' src='http://www.gravatar.com/avatar/1069e488bedd1507ae86a217e5e4d3bd?s=32&amp;d=http%3A%2F%2Fwww.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G' class='avatar avatar-32 photo' height='32' width='32' />			<span title="125.34.51.*"><a href='http://www.laruence.com' rel='external nofollow' class='url'>雪候鸟</a></span> | <small class="commentmetadata">10 May 2009 10:36</a> </small>
+			
+			<p>不反对，点都不反对。。。呵呵</p>
+		</li>
+
+	
+	
+		<li id="comment-1685">
+	        <img alt='' src='http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=32' class='avatar avatar-32 photo avatar-default' height='32' width='32' />			<span title="202.106.180.*"><a href='http://www.sysbus.com' rel='external nofollow' class='url'>就天鹰</a></span> | <small class="commentmetadata">08 May 2009 12:15</a> </small>
+			
+			<p>不错，一直找不到支持ff的方法<br />
+转载一下，不反对吧，谢谢</p>
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1683">
+	        <img alt='' src='http://www.gravatar.com/avatar/1069e488bedd1507ae86a217e5e4d3bd?s=32&amp;d=http%3A%2F%2Fwww.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G' class='avatar avatar-32 photo' height='32' width='32' />			<span title="123.112.75.*"><a href='http://www.laruence.com' rel='external nofollow' class='url'>雪候鸟</a></span> | <small class="commentmetadata">07 May 2009 22:00</a> </small>
+			
+			<p>也就是IE8麻烦&#8230;</p>
+		</li>
+
+	
+	
+		<li id="comment-1682">
+	        <img alt='' src='http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=32' class='avatar avatar-32 photo avatar-default' height='32' width='32' />			<span title="119.122.245.*"><a href='http://willko.javaeye.com' rel='external nofollow' class='url'>WIllko</a></span> | <small class="commentmetadata">07 May 2009 21:55</a> </small>
+			
+			<p>我把兼容ie6/7系列的代码写在了这http://willko.javaeye.com/admin/blogs/381684</p>
+<p>希望继续探讨</p>
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1681">
+	        <img alt='' src='http://www.gravatar.com/avatar/2f43b42fd833d1e77420a8dae7419000?s=32&amp;d=http%3A%2F%2Fwww.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G' class='avatar avatar-32 photo' height='32' width='32' />			<span title="202.165.107.*"><a href='http://....' rel='external nofollow' class='url'>...</a></span> | <small class="commentmetadata">07 May 2009 16:39</a> </small>
+			
+			<p><a href="http://www.cnblogs.com/jaxu/archive/2009/04/21/1439016.html" rel="nofollow">http://www.cnblogs.com/jaxu/archive/2009/04/21/1439016.html</a></p>
+		</li>
+
+	
+	
+		<li id="comment-1678">
+	        <img alt='' src='http://www.gravatar.com/avatar/cfad3094f9c4e59cf9d2eb9de82e9d6e?s=32&amp;d=http%3A%2F%2Fwww.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G' class='avatar avatar-32 photo' height='32' width='32' />			<span title="58.22.8.*"><a href='http://www.zendstudio.net/' rel='external nofollow' class='url'>gently</a></span> | <small class="commentmetadata">06 May 2009 22:52</a> </small>
+			
+			<p>老外们讨论的结果似乎是通过flash桥接来解决兼容问题。一如Gmail的实时提示附件太大。</p>
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1675">
+	        <img alt='' src='http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=32' class='avatar avatar-32 photo avatar-default' height='32' width='32' />			<span title="218.106.254.*"><a href='http://www.sysbus.com/?p=183' rel='external nofollow' class='url'>图片上传即时显示缩略图解决方法(支持firefox3和ie8) 网站系统架构网摘 - 系统 架构 服务器 优化 网站</a></span> | <small class="commentmetadata">06 May 2009 16:51</a> </small>
+			
+			<p>[...] from：http://www.laruence.com/2009/05/06/758.html  Facebook 如何管理150亿张照片 [...]</p>
+		</li>
+
+	
+	
+		<li id="comment-1674">
+	        <img alt='' src='http://www.gravatar.com/avatar/1069e488bedd1507ae86a217e5e4d3bd?s=32&amp;d=http%3A%2F%2Fwww.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G' class='avatar avatar-32 photo' height='32' width='32' />			<span title="61.135.165.*"><a href='http://www.laruence.com' rel='external nofollow' class='url'>雪候鸟</a></span> | <small class="commentmetadata">06 May 2009 15:35</a> </small>
+			
+			<p>哦,手误,<br />
+恩, 用activeX来专门处理IE series, 那是肯定可以的.</p>
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1673">
+	        <img alt='' src='http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=32' class='avatar avatar-32 photo avatar-default' height='32' width='32' />			<span title="202.165.107.*"><a href='http://onemouse.cn' rel='external nofollow' class='url'>Anders</a></span> | <small class="commentmetadata">06 May 2009 15:29</a> </small>
+			
+			<p>some code is invalid.<br />
+ widht  = container.widht;</p>
+<p>恩，不错。</p>
+<p>支付宝的,我猜可能是控件。</p>
+		</li>
+
+	
+	
+		<li id="comment-1671">
+	        <img alt='' src='http://www.gravatar.com/avatar/f46653025eef5156e9dc1143b486f819?s=32&amp;d=http%3A%2F%2Fwww.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G' class='avatar avatar-32 photo' height='32' width='32' />			<span title="125.70.163.*"><a href='http://www.coudou.com' rel='external nofollow' class='url'>dyh1919</a></span> | <small class="commentmetadata">06 May 2009 15:15</a> </small>
+			
+			<p>记得支付宝里有一个上传身份证的看缩略图，估计兼容性是做到的了，可以试着扣出来</p>
+		</li>
+
+	
+	
+		<li class="alt" id="comment-1670">
+	        <img alt='' src='http://www.gravatar.com/avatar/1069e488bedd1507ae86a217e5e4d3bd?s=32&amp;d=http%3A%2F%2Fwww.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D32&amp;r=G' class='avatar avatar-32 photo' height='32' width='32' />			<span title="61.135.165.*"><a href='http://www.laruence.com' rel='external nofollow' class='url'>雪候鸟</a></span> | <small class="commentmetadata">06 May 2009 14:38</a> </small>
+			
+			<p>chrome是webkit核心的,,目前还没有找到方法怎么获取文件全路径.<br />
+另外,IE8还和安全级别设置有关系..</p>
+		</li>
+
+	
+	
+		<li id="comment-1669">
+	        <img alt='' src='http://www.gravatar.com/avatar/ad516503a11cd5ca435acc9bb6523536?s=32' class='avatar avatar-32 photo avatar-default' height='32' width='32' />			<span title="61.144.177.*"><a href='http://willko.javaeye.com' rel='external nofollow' class='url'>Willko</a></span> | <small class="commentmetadata">06 May 2009 14:06</a> </small>
+			
+			<p>真是及时雨啊。。。<br />
+不知道有没有兼容性更强的呢？</p>
+		</li>
+
+	
+	
+	</ol>
+
+<!-- Comment page numbers -->
+<!-- End comment page numbers -->
+
+ 
+
+
+<h3 id="respond">Leave a Reply</h3>
+
+
+<form action="http://www.laruence.com/wp-comments-post.php" method="post" id="commentform">
+
+
+<p><input type="text" name="author" id="author" value="" size="22" tabindex="1" />
+<label for="author"><small>Name </small></label></p>
+
+<p><input type="text" name="email" id="email" value="" size="22" tabindex="2" />
+<label for="email"><small>Mail (will not be published) </small></label></p>
+
+<p><input type="text" name="url" id="url" value="" size="22" tabindex="3" />
+<label for="url"><small>Website</small></label></p>
+
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags: <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></small></p>-->
+
+<p><textarea name="comment" id="comment" cols="100%" rows="10" tabindex="4"></textarea></p>
+
+<p><input name="submit" type="submit" id="submit" tabindex="5" value="Submit Comment" />
+<input type="hidden" name="comment_post_ID" value="758" />
+</p>
+
+<div id="captchaImgDiv">
+
+<div id="captchaSizeDivLarge"><img id="si_image_com" class="si-captcha" src="http://www.laruence.com/wp-content/plugins/si-captcha-for-wordpress/captcha-secureimage/securimage_show.php?si_form_id=com" alt="CAPTCHA Image" title="CAPTCHA Image" />
+<div id="si_flash_com">
+        <object type="application/x-shockwave-flash"
+                data="/wp-content/plugins/si-captcha-for-wordpress/captcha-secureimage/securimage_play.swf?si_form_id=com&amp;bgColor1=#8E9CB6&amp;bgColor2=#fff&amp;iconColor=#000&amp;roundedCorner=5&amp;audio=/wp-content/plugins/si-captcha-for-wordpress/captcha-secureimage/securimage_play.php?si_form_id=com"
+                id="SecurImage_as3_com" width="19" height="19" align="middle">
+			    <param name="allowScriptAccess" value="sameDomain" />
+			    <param name="allowFullScreen" value="false" />
+			    <param name="movie" value="/wp-content/plugins/si-captcha-for-wordpress/captcha-secureimage/securimage_play.swf?si_form_id=com&amp;bgColor1=#8E9CB6&amp;bgColor2=#fff&amp;iconColor=#000&amp;roundedCorner=5&amp;audio=/wp-content/plugins/si-captcha-for-wordpress/captcha-secureimage/securimage_play.php?si_form_id=com" />
+			    <param name="quality" value="high" />
+			    <param name="bgcolor" value="#ffffff" />
+		</object></div>
+            <div id="si_refresh_com">
+<a href="#" rel="nofollow" title="Refresh Image" onclick="document.getElementById('si_image_com').src = 'http://www.laruence.com/wp-content/plugins/si-captcha-for-wordpress/captcha-secureimage/securimage_show.php?si_form_id=com&amp;sid=' + Math.random(); return false;">
+      <img id="captchaImgRefresh" src="http://www.laruence.com/wp-content/plugins/si-captcha-for-wordpress/captcha-secureimage/images/refresh.png" alt="Refresh Image" onclick="this.blur();" /></a>
+  </div>
+  </div>
+<div id="captchaInputDiv"><input id="captcha_code" name="captcha_code" type="text" value="" tabindex="4"  />
+ <label id="captcha_code_label" for="captcha_code">CAPTCHA Code</label><span class="required"> *</span>
+ </div>
+</div>
+      <script type='text/javascript'>
+          var sUrlInput = document.getElementById("comment");
+                  var oParent = sUrlInput.parentNode;
+          var sSubstitue = document.getElementById("captchaImgDiv");
+                  oParent.appendChild(sSubstitue, sUrlInput);
+      </script>
+            <noscript>
+          <style type='text/css'>#submit {display:none;}</style><br />           <input name="submit" type="submit" id="submit-alt" tabindex="6" value="Submit Comment" />
+          </noscript>
+  
+
+	<p style="clear: both;" class="subscribe-to-comments">
+	<input type="checkbox" name="subscribe" id="subscribe" value="subscribe" style="width: auto;" />
+	<label for="subscribe">Notify me of followup comments via e-mail</label>
+	</p>
+
+
+<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="3cd19f462f" /></p>
+</form>
+
+
+
+		
+				
+			<div style="clear:both"></div>
+			<div class="navigation">
+			</div>
+    </div>
+      
+	    <div class='sidebar span-8 last'>
+		<div class="sidebarboxtop"><img src="http://www.laruence.com/wp-content/themes/googlechrome/images/sidebartop.gif" alt="sidebartop" /></div><div class="sidebarbox"><h3>  </h3>			<div class="textwidget"><!--<div id="meme">
+            <a href="http://www.twitter.com/laruence" target="meme" title="Twitter"><img src="/images/ico-twitter.png" /></a>
+            <a href="http://t.sina.com/laruence" target="meme" title="新浪微博"><img src="/images/ico-sina.png" /></a>
+            <a href="http://fusion.google.com/add?feedurl=http://www.laruence.com/feed" target="meme" title="Google阅读器"><img src="/images/ico-google.png" /></a>
+            <a href="mailto:laruence@yahoo.com.cn" target="meme" title="邮件"><img src="/images/ico-mail.png" /></a>
+</div>
+-->
+<div class="weibo" id="meme"><iframe width="136" height="24" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0" scrolling="no" border="0" src="http://widget.weibo.com/relationship/followbutton.php?language=zh_cn&width=136&height=24&uid=1170999921&style=2&btn=red&dpc=1"></iframe></div>
+<div id="profile">
+   <img class="avatar" src="http://www.laruence.com/images/gavatar.png?orig=http://tp2.sinaimg.cn/1170999921/50/5606703689/1" height=50 width=50  />
+   <span class="name">Laruence</span>
+   <p class="intro">
+      <a href="http://www.php.net/" target="_blank" style="color:#000">PHP</a>开发组核心成员, <a href="http://www.zend.com/" style="color:#000">Zend</a>顾问, PHP7主要开发者, <a href="http://pecl.php.net/yaf" target="_blank" style="color:#000">Yaf</a>, <a href="http://pecl.php.net/yar" target="_blank" style="color:#000">Yar</a>, <a href="http://pecl.php.net/Yac" target="_blank" style="color:#000">Yac</a>等开源项目作者.
+   </p>
+</div>
+</div>
+		</div><div class="sidebarboxbottom"><img src="http://www.laruence.com/wp-content/themes/googlechrome/images/sidebarbottom.gif" alt="sidebarbottom" /></div><div class="sidebarboxtop"><img src="http://www.laruence.com/wp-content/themes/googlechrome/images/sidebartop.gif" alt="sidebartop" /></div><div class="sidebarbox"><h3>OpenSource Projects</h3>			<div class="textwidget"><div id="projects" style="line-height:22px">
+<a href="http://pecl.php.net/package/yaf" target='_blank'>Yaf</a>: PHP Framework in PHP extension<br/>
+ 
+<a href="http://pecl.php.net/package/yar" target='_blank'>Yar</a>: Light, concurrent RPC framework<br/>
+
+<a href="http://pecl.php.net/yac"  target='_blank'>Yac</a>: PHP Contents cache<br>
+
+<a href="https://github.com/laruence/yaconf"  target='_blank'>Yaconf</a>: PHP Configurations Container<br>
+
+<a href="http://pecl.php.net/package/taint" target='_blank'>Taint</a>: XSS code sniffer<br/>
+
+<a href="http://pecl.php.net/package/lua" target='_blank'>Lua</a>: Embedded lua interpreter<br/>
+
+<a href="http://pecl.php.net/package/msgpack" target='_blank'>MsgPack</a>:MessagePack in PHP extension<br/>
+
+<a href="http://pecl.php.net/package/couchbase" target='_blank'>Couchbase</a>: Libcouchbase wrapper<br/>
+ 
+See also: <a href="http://github.com/laruence">laruence@github</a>
+</div></div>
+		</div><div class="sidebarboxbottom"><img src="http://www.laruence.com/wp-content/themes/googlechrome/images/sidebarbottom.gif" alt="sidebarbottom" /></div><div class="sidebarboxtop"><img src="http://www.laruence.com/wp-content/themes/googlechrome/images/sidebartop.gif" alt="sidebartop" /></div><div class="sidebarbox"><h3>Advanced Random Posts</h3><ul class="advanced-random-posts"><li><a href="http://www.laruence.com/2009/09/14/1081.html" title="CSS让你的IE浏览器崩溃(Crash your IE)" >CSS让你的IE浏览器崩溃(Crash your IE)</a></li>
+<li><a href="http://www.laruence.com/2008/11/07/586.html" title="深入理解PHP原理之文件上传" >深入理解PHP原理之文件上传</a></li>
+<li><a href="http://www.laruence.com/2008/11/07/581.html" title="PHP的GET/POST等大变量生成过程" >PHP的GET/POST等大变量生成过程</a></li>
+<li><a href="http://www.laruence.com/2010/06/20/1602.html" title="深入理解PHP之匿名函数" >深入理解PHP之匿名函数</a></li>
+<li><a href="http://www.laruence.com/2009/05/18/809.html" title="使用JS做文档处理" >使用JS做文档处理</a></li>
+</ul></div><div class="sidebarboxbottom"><img src="http://www.laruence.com/wp-content/themes/googlechrome/images/sidebarbottom.gif" alt="sidebarbottom" /></div><div class="sidebarboxtop"><img src="http://www.laruence.com/wp-content/themes/googlechrome/images/sidebartop.gif" alt="sidebartop" /></div><div class="sidebarbox"><h3>Recent Comments</h3><ul id="recentcomments"><li class="recentcomments"><a href='http://www.518qm.com' rel='external nofollow' class='url'>xxoo电影</a> on <a href="http://www.laruence.com/2016/07/19/3101.html/comment-page-1#comment-226757">HTTPOXY漏洞说明</a></li><li class="recentcomments"><a href='https://lenta.ru' rel='external nofollow' class='url'>Lebragan25</a> on <a href="http://www.laruence.com/guestbook/comment-page-22#comment-226739">留言</a></li><li class="recentcomments"><a href='https://www.hffhom.com/2018/01/05/php7%e4%b8%8b%e7%9a%84%e5%8d%8f%e7%a8%8b%e5%ae%9e%e7%8e%b0/' rel='external nofollow' class='url'>PHP7下的协程实现 &#8211; hufangfang_blog</a> on <a href="http://www.laruence.com/2015/05/28/3038.html/comment-page-2#comment-226716">在PHP中使用协程实现多任务调度</a></li><li class="recentcomments"><a href='http://www.basuyun.com' rel='external nofollow' class='url'>midi音乐下载</a> on <a href="http://www.laruence.com/2016/12/18/3137.html/comment-page-2#comment-226556">PHP的性能演进(从PHP5.0到PHP7.1的性能全评测)</a></li><li class="recentcomments"><a href='http://rollingskygame.com/run-3' rel='external nofollow' class='url'>run 3</a> on <a href="http://www.laruence.com/2007/12/11/122.html/comment-page-1#comment-226529">Perl的特别之处</a></li><li class="recentcomments"><a href='http://clickerheroes.co/' rel='external nofollow' class='url'>clicker heroes</a> on <a href="http://www.laruence.com/2010/10/26/1768.html/comment-page-1#comment-226528">AllowEncodedSlashes in Apache</a></li><li class="recentcomments"><a href='http://geometrydashfree.com/' rel='external nofollow' class='url'>geometry dash lite</a> on <a href="http://www.laruence.com/2010/04/12/1394.html/comment-page-1#comment-226527">IE下pre标签的InnerHTML问题</a></li><li class="recentcomments"><a href='http://www.5u6666.com' rel='external nofollow' class='url'>淘宝优惠券</a> on <a href="http://www.laruence.com/2016/12/18/3137.html/comment-page-2#comment-226482">PHP的性能演进(从PHP5.0到PHP7.1的性能全评测)</a></li><li class="recentcomments"><a href='https://happywheelsnow.com/' rel='external nofollow' class='url'>happywheelsnow.com</a> on <a href="http://www.laruence.com/2008/04/18/104.html/comment-page-1#comment-226479">C++判断本机的字节序的方法</a></li><li class="recentcomments"><a href='http://jz.zzcjyy.cn' rel='external nofollow' class='url'>焦作不孕不育</a> on <a href="http://www.laruence.com/2015/12/04/3083.html/comment-page-1#comment-226471">写在PHP7发布之际的一些话</a></li></ul></div><div class="sidebarboxbottom"><img src="http://www.laruence.com/wp-content/themes/googlechrome/images/sidebarbottom.gif" alt="sidebarbottom" /></div>	        <div class="sidebarboxtop"><img src="http://www.laruence.com/wp-content/themes/googlechrome/images/sidebartop.gif" alt="sidebartop" /></div><div class="sidebarbox">							<h3>Tags</h3>						<!-- SWFObject embed by Geoff Stearns geoff@deconcept.com http://blog.deconcept.com/swfobject/ --><script type="text/javascript" src="http://www.laruence.com/wp-content/plugins/wp-cumulus/swfobject.js"></script><div id="wpcumuluswidgetcontent4757780"><p><a href='http://www.laruence.com/tag/apache' class='tag-link-42' title='6 topics' style='font-size: 11.1204819277pt;'>Apache</a>
+<a href='http://www.laruence.com/tag/apc' class='tag-link-223' title='6 topics' style='font-size: 11.1204819277pt;'>apc</a>
+<a href='http://www.laruence.com/tag/bug' class='tag-link-75' title='5 topics' style='font-size: 10.5301204819pt;'>bug</a>
+<a href='http://www.laruence.com/tag/c' class='tag-link-23' title='3 topics' style='font-size: 9.01204819277pt;'>C++</a>
+<a href='http://www.laruence.com/tag/charset' class='tag-link-48' title='3 topics' style='font-size: 9.01204819277pt;'>charset</a>
+<a href='http://www.laruence.com/tag/cookie' class='tag-link-21' title='2 topics' style='font-size: 8pt;'>COOKIE</a>
+<a href='http://www.laruence.com/tag/core' class='tag-link-224' title='6 topics' style='font-size: 11.1204819277pt;'>core</a>
+<a href='http://www.laruence.com/tag/debug' class='tag-link-53' title='2 topics' style='font-size: 8pt;'>debug</a>
+<a href='http://www.laruence.com/tag/engine' class='tag-link-57' title='2 topics' style='font-size: 8pt;'>engine</a>
+<a href='http://www.laruence.com/tag/extension' class='tag-link-18' title='5 topics' style='font-size: 10.5301204819pt;'>Extension</a>
+<a href='http://www.laruence.com/tag/get' class='tag-link-19' title='2 topics' style='font-size: 8pt;'>GET</a>
+<a href='http://www.laruence.com/tag/ie' class='tag-link-36' title='3 topics' style='font-size: 9.01204819277pt;'>IE</a>
+<a href='http://www.laruence.com/tag/javascript' class='tag-link-9' title='14 topics' style='font-size: 13.9036144578pt;'>javascript</a>
+<a href='http://www.laruence.com/tag/js' class='tag-link-130' title='3 topics' style='font-size: 9.01204819277pt;'>js</a>
+<a href='http://www.laruence.com/tag/json' class='tag-link-79' title='3 topics' style='font-size: 9.01204819277pt;'>json</a>
+<a href='http://www.laruence.com/tag/module' class='tag-link-43' title='2 topics' style='font-size: 8pt;'>Module</a>
+<a href='http://www.laruence.com/tag/mysql' class='tag-link-13' title='4 topics' style='font-size: 9.85542168675pt;'>mysql</a>
+<a href='http://www.laruence.com/tag/nginx' class='tag-link-187' title='4 topics' style='font-size: 9.85542168675pt;'>nginx</a>
+<a href='http://www.laruence.com/tag/opcache' class='tag-link-606' title='3 topics' style='font-size: 9.01204819277pt;'>opcache</a>
+<a href='http://www.laruence.com/tag/php' class='tag-link-17' title='137 topics' style='font-size: 22pt;'>PHP</a>
+<a href='http://www.laruence.com/tag/php5-4' class='tag-link-440' title='4 topics' style='font-size: 9.85542168675pt;'>PHP5.4</a>
+<a href='http://www.laruence.com/tag/php5-4%e6%96%b0%e7%89%b9%e6%80%a7' class='tag-link-470' title='12 topics' style='font-size: 13.313253012pt;'>PHP5.4新特性</a>
+<a href='http://www.laruence.com/tag/php7' class='tag-link-614' title='6 topics' style='font-size: 11.1204819277pt;'>PHP7</a>
+<a href='http://www.laruence.com/tag/php-extension' class='tag-link-344' title='5 topics' style='font-size: 10.5301204819pt;'>PHP extension</a>
+<a href='http://www.laruence.com/tag/php%e5%8e%9f%e7%90%86' class='tag-link-107' title='4 topics' style='font-size: 9.85542168675pt;'>php原理</a>
+<a href='http://www.laruence.com/tag/php%e5%ba%94%e7%94%a8' class='tag-link-98' title='3 topics' style='font-size: 9.01204819277pt;'>PHP应用</a>
+<a href='http://www.laruence.com/tag/php%e6%89%a9%e5%b1%95' class='tag-link-345' title='3 topics' style='font-size: 9.01204819277pt;'>PHP扩展</a>
+<a href='http://www.laruence.com/tag/php%e6%ba%90%e7%a0%81' class='tag-link-94' title='4 topics' style='font-size: 9.85542168675pt;'>php源码</a>
+<a href='http://www.laruence.com/tag/php%e6%ba%90%e7%a0%81%e5%88%86%e6%9e%90' class='tag-link-160' title='9 topics' style='font-size: 12.3855421687pt;'>php源码分析</a>
+<a href='http://www.laruence.com/tag/sapi' class='tag-link-60' title='4 topics' style='font-size: 9.85542168675pt;'>SAPI</a>
+<a href='http://www.laruence.com/tag/session' class='tag-link-164' title='5 topics' style='font-size: 10.5301204819pt;'>session</a>
+<a href='http://www.laruence.com/tag/utf8' class='tag-link-7' title='2 topics' style='font-size: 8pt;'>utf8</a>
+<a href='http://www.laruence.com/tag/valgrind' class='tag-link-600' title='3 topics' style='font-size: 9.01204819277pt;'>valgrind</a>
+<a href='http://www.laruence.com/tag/vim' class='tag-link-5' title='3 topics' style='font-size: 9.01204819277pt;'>vim</a>
+<a href='http://www.laruence.com/tag/yac' class='tag-link-589' title='3 topics' style='font-size: 9.01204819277pt;'>yac</a>
+<a href='http://www.laruence.com/tag/yaf' class='tag-link-343' title='13 topics' style='font-size: 13.6506024096pt;'>Yaf</a>
+<a href='http://www.laruence.com/tag/yar' class='tag-link-571' title='3 topics' style='font-size: 9.01204819277pt;'>Yar</a>
+<a href='http://www.laruence.com/tag/zendphp' class='tag-link-58' title='12 topics' style='font-size: 13.313253012pt;'>Zend/PHP</a>
+<a href='http://www.laruence.com/tag/%e4%b9%b1%e7%a0%81' class='tag-link-6' title='2 topics' style='font-size: 8pt;'>乱码</a>
+<a href='http://www.laruence.com/tag/%e5%8e%9f%e7%90%86' class='tag-link-205' title='3 topics' style='font-size: 9.01204819277pt;'>原理</a>
+<a href='http://www.laruence.com/tag/%e5%bc%80%e5%8f%91php%e6%89%a9%e5%b1%95' class='tag-link-114' title='3 topics' style='font-size: 9.01204819277pt;'>开发php扩展</a>
+<a href='http://www.laruence.com/tag/%e5%bc%82%e6%ad%a5' class='tag-link-30' title='2 topics' style='font-size: 8pt;'>异步</a>
+<a href='http://www.laruence.com/tag/%e6%80%a7%e8%83%bd' class='tag-link-210' title='4 topics' style='font-size: 9.85542168675pt;'>性能</a>
+<a href='http://www.laruence.com/tag/%e6%89%a9%e5%b1%95%e5%bc%80%e5%8f%91' class='tag-link-444' title='6 topics' style='font-size: 11.1204819277pt;'>扩展开发</a>
+<a href='http://www.laruence.com/tag/%e6%ad%a3%e5%88%99' class='tag-link-191' title='3 topics' style='font-size: 9.01204819277pt;'>正则</a>	<a href="http://www.laruence.com/category/gnuc" title="View all posts filed under GNU C/C++">GNU C/C++</a> (8)<br />
+	<a href="http://www.laruence.com/category/jscss" title="View all posts filed under Js/CSS">Js/CSS</a> (24)<br />
+	<a href="http://www.laruence.com/category/os" title="View all posts filed under Linux/Unix">Linux/Unix</a> (15)<br />
+	<a href="http://www.laruence.com/category/mysqlpostgresql" title="View all posts filed under MySQL/PostgreSQL">MySQL/PostgreSQL</a> (7)<br />
+	<a href="http://www.laruence.com/category/phpext" title="View all posts filed under PHP Extension">PHP Extension</a> (19)<br />
+	<a href="http://www.laruence.com/category/php-usage" title="View all posts filed under PHP应用">PHP应用</a> (171)<br />
+	<a href="http://www.laruence.com/category/php-internal" title="PHP源码分析, Zend内核解析">PHP源码分析</a> (80)<br />
+	<a href="http://www.laruence.com/category/%e8%bd%ac%e8%bd%bd" title="View all posts filed under 转载">转载</a> (32)<br />
+	<a href="http://www.laruence.com/category/notes" title="View all posts filed under 随笔">随笔</a> (93)<br />
+</p><p>WP Cumulus Flash tag cloud by <a href="http://www.roytanck.com">Roy Tanck</a> and <a href="http://lukemorton.co.uk/">Luke Morton</a> requires <a href="http://www.macromedia.com/go/getflashplayer">Flash Player</a> 9 or better.</p></div><script type="text/javascript">var widget_so2460791 = new SWFObject("http://www.laruence.com/wp-content/plugins/wp-cumulus/tagcloud.swf?r=2648235", "tagcloudflash", "260", "260", "9", "#ffffff");widget_so2460791.addParam("wmode", "transparent");widget_so2460791.addParam("allowScriptAccess", "always");widget_so2460791.addVariable("tcolor", "0x333333");widget_so2460791.addVariable("tcolor2", "0x333333");widget_so2460791.addVariable("hicolor", "0x000000");widget_so2460791.addVariable("tspeed", "100");widget_so2460791.addVariable("distr", "true");widget_so2460791.addVariable("mode", "both");widget_so2460791.addVariable("tagcloud", "%3Ctags%3E%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fapache%27+class%3D%27tag-link-42%27+title%3D%276+topics%27+style%3D%27font-size%3A+11.1204819277pt%3B%27%3EApache%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fapc%27+class%3D%27tag-link-223%27+title%3D%276+topics%27+style%3D%27font-size%3A+11.1204819277pt%3B%27%3Eapc%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fbug%27+class%3D%27tag-link-75%27+title%3D%275+topics%27+style%3D%27font-size%3A+10.5301204819pt%3B%27%3Ebug%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fc%27+class%3D%27tag-link-23%27+title%3D%273+topics%27+style%3D%27font-size%3A+9.01204819277pt%3B%27%3EC%2B%2B%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fcharset%27+class%3D%27tag-link-48%27+title%3D%273+topics%27+style%3D%27font-size%3A+9.01204819277pt%3B%27%3Echarset%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fcookie%27+class%3D%27tag-link-21%27+title%3D%272+topics%27+style%3D%27font-size%3A+8pt%3B%27%3ECOOKIE%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fcore%27+class%3D%27tag-link-224%27+title%3D%276+topics%27+style%3D%27font-size%3A+11.1204819277pt%3B%27%3Ecore%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fdebug%27+class%3D%27tag-link-53%27+title%3D%272+topics%27+style%3D%27font-size%3A+8pt%3B%27%3Edebug%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fengine%27+class%3D%27tag-link-57%27+title%3D%272+topics%27+style%3D%27font-size%3A+8pt%3B%27%3Eengine%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fextension%27+class%3D%27tag-link-18%27+title%3D%275+topics%27+style%3D%27font-size%3A+10.5301204819pt%3B%27%3EExtension%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fget%27+class%3D%27tag-link-19%27+title%3D%272+topics%27+style%3D%27font-size%3A+8pt%3B%27%3EGET%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fie%27+class%3D%27tag-link-36%27+title%3D%273+topics%27+style%3D%27font-size%3A+9.01204819277pt%3B%27%3EIE%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fjavascript%27+class%3D%27tag-link-9%27+title%3D%2714+topics%27+style%3D%27font-size%3A+13.9036144578pt%3B%27%3Ejavascript%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fjs%27+class%3D%27tag-link-130%27+title%3D%273+topics%27+style%3D%27font-size%3A+9.01204819277pt%3B%27%3Ejs%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fjson%27+class%3D%27tag-link-79%27+title%3D%273+topics%27+style%3D%27font-size%3A+9.01204819277pt%3B%27%3Ejson%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fmodule%27+class%3D%27tag-link-43%27+title%3D%272+topics%27+style%3D%27font-size%3A+8pt%3B%27%3EModule%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fmysql%27+class%3D%27tag-link-13%27+title%3D%274+topics%27+style%3D%27font-size%3A+9.85542168675pt%3B%27%3Emysql%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fnginx%27+class%3D%27tag-link-187%27+title%3D%274+topics%27+style%3D%27font-size%3A+9.85542168675pt%3B%27%3Enginx%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fopcache%27+class%3D%27tag-link-606%27+title%3D%273+topics%27+style%3D%27font-size%3A+9.01204819277pt%3B%27%3Eopcache%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fphp%27+class%3D%27tag-link-17%27+title%3D%27137+topics%27+style%3D%27font-size%3A+22pt%3B%27%3EPHP%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fphp5-4%27+class%3D%27tag-link-440%27+title%3D%274+topics%27+style%3D%27font-size%3A+9.85542168675pt%3B%27%3EPHP5.4%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fphp5-4%25e6%2596%25b0%25e7%2589%25b9%25e6%2580%25a7%27+class%3D%27tag-link-470%27+title%3D%2712+topics%27+style%3D%27font-size%3A+13.313253012pt%3B%27%3EPHP5.4%E6%96%B0%E7%89%B9%E6%80%A7%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fphp7%27+class%3D%27tag-link-614%27+title%3D%276+topics%27+style%3D%27font-size%3A+11.1204819277pt%3B%27%3EPHP7%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fphp-extension%27+class%3D%27tag-link-344%27+title%3D%275+topics%27+style%3D%27font-size%3A+10.5301204819pt%3B%27%3EPHP+extension%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fphp%25e5%258e%259f%25e7%2590%2586%27+class%3D%27tag-link-107%27+title%3D%274+topics%27+style%3D%27font-size%3A+9.85542168675pt%3B%27%3Ephp%E5%8E%9F%E7%90%86%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fphp%25e5%25ba%2594%25e7%2594%25a8%27+class%3D%27tag-link-98%27+title%3D%273+topics%27+style%3D%27font-size%3A+9.01204819277pt%3B%27%3EPHP%E5%BA%94%E7%94%A8%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fphp%25e6%2589%25a9%25e5%25b1%2595%27+class%3D%27tag-link-345%27+title%3D%273+topics%27+style%3D%27font-size%3A+9.01204819277pt%3B%27%3EPHP%E6%89%A9%E5%B1%95%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fphp%25e6%25ba%2590%25e7%25a0%2581%27+class%3D%27tag-link-94%27+title%3D%274+topics%27+style%3D%27font-size%3A+9.85542168675pt%3B%27%3Ephp%E6%BA%90%E7%A0%81%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fphp%25e6%25ba%2590%25e7%25a0%2581%25e5%2588%2586%25e6%259e%2590%27+class%3D%27tag-link-160%27+title%3D%279+topics%27+style%3D%27font-size%3A+12.3855421687pt%3B%27%3Ephp%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fsapi%27+class%3D%27tag-link-60%27+title%3D%274+topics%27+style%3D%27font-size%3A+9.85542168675pt%3B%27%3ESAPI%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fsession%27+class%3D%27tag-link-164%27+title%3D%275+topics%27+style%3D%27font-size%3A+10.5301204819pt%3B%27%3Esession%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Futf8%27+class%3D%27tag-link-7%27+title%3D%272+topics%27+style%3D%27font-size%3A+8pt%3B%27%3Eutf8%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fvalgrind%27+class%3D%27tag-link-600%27+title%3D%273+topics%27+style%3D%27font-size%3A+9.01204819277pt%3B%27%3Evalgrind%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fvim%27+class%3D%27tag-link-5%27+title%3D%273+topics%27+style%3D%27font-size%3A+9.01204819277pt%3B%27%3Evim%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fyac%27+class%3D%27tag-link-589%27+title%3D%273+topics%27+style%3D%27font-size%3A+9.01204819277pt%3B%27%3Eyac%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fyaf%27+class%3D%27tag-link-343%27+title%3D%2713+topics%27+style%3D%27font-size%3A+13.6506024096pt%3B%27%3EYaf%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fyar%27+class%3D%27tag-link-571%27+title%3D%273+topics%27+style%3D%27font-size%3A+9.01204819277pt%3B%27%3EYar%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2Fzendphp%27+class%3D%27tag-link-58%27+title%3D%2712+topics%27+style%3D%27font-size%3A+13.313253012pt%3B%27%3EZend%2FPHP%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2F%25e4%25b9%25b1%25e7%25a0%2581%27+class%3D%27tag-link-6%27+title%3D%272+topics%27+style%3D%27font-size%3A+8pt%3B%27%3E%E4%B9%B1%E7%A0%81%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2F%25e5%258e%259f%25e7%2590%2586%27+class%3D%27tag-link-205%27+title%3D%273+topics%27+style%3D%27font-size%3A+9.01204819277pt%3B%27%3E%E5%8E%9F%E7%90%86%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2F%25e5%25bc%2580%25e5%258f%2591php%25e6%2589%25a9%25e5%25b1%2595%27+class%3D%27tag-link-114%27+title%3D%273+topics%27+style%3D%27font-size%3A+9.01204819277pt%3B%27%3E%E5%BC%80%E5%8F%91php%E6%89%A9%E5%B1%95%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2F%25e5%25bc%2582%25e6%25ad%25a5%27+class%3D%27tag-link-30%27+title%3D%272+topics%27+style%3D%27font-size%3A+8pt%3B%27%3E%E5%BC%82%E6%AD%A5%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2F%25e6%2580%25a7%25e8%2583%25bd%27+class%3D%27tag-link-210%27+title%3D%274+topics%27+style%3D%27font-size%3A+9.85542168675pt%3B%27%3E%E6%80%A7%E8%83%BD%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2F%25e6%2589%25a9%25e5%25b1%2595%25e5%25bc%2580%25e5%258f%2591%27+class%3D%27tag-link-444%27+title%3D%276+topics%27+style%3D%27font-size%3A+11.1204819277pt%3B%27%3E%E6%89%A9%E5%B1%95%E5%BC%80%E5%8F%91%3C%2Fa%3E%0A%3Ca+href%3D%27http%3A%2F%2Fwww.laruence.com%2Ftag%2F%25e6%25ad%25a3%25e5%2588%2599%27+class%3D%27tag-link-191%27+title%3D%273+topics%27+style%3D%27font-size%3A+9.01204819277pt%3B%27%3E%E6%AD%A3%E5%88%99%3C%2Fa%3E%3C%2Ftags%3E");widget_so2460791.addVariable("categories", "%09%3Ca+href%3D%22http%3A%2F%2Fwww.laruence.com%2Fcategory%2Fgnuc%22+title%3D%22View+all+posts+filed+under+GNU+C%2FC%2B%2B%22%3EGNU+C%2FC%2B%2B%3C%2Fa%3E+%288%29%3Cbr+%2F%3E%0A%09%3Ca+href%3D%22http%3A%2F%2Fwww.laruence.com%2Fcategory%2Fjscss%22+title%3D%22View+all+posts+filed+under+Js%2FCSS%22%3EJs%2FCSS%3C%2Fa%3E+%2824%29%3Cbr+%2F%3E%0A%09%3Ca+href%3D%22http%3A%2F%2Fwww.laruence.com%2Fcategory%2Fos%22+title%3D%22View+all+posts+filed+under+Linux%2FUnix%22%3ELinux%2FUnix%3C%2Fa%3E+%2815%29%3Cbr+%2F%3E%0A%09%3Ca+href%3D%22http%3A%2F%2Fwww.laruence.com%2Fcategory%2Fmysqlpostgresql%22+title%3D%22View+all+posts+filed+under+MySQL%2FPostgreSQL%22%3EMySQL%2FPostgreSQL%3C%2Fa%3E+%287%29%3Cbr+%2F%3E%0A%09%3Ca+href%3D%22http%3A%2F%2Fwww.laruence.com%2Fcategory%2Fphpext%22+title%3D%22View+all+posts+filed+under+PHP+Extension%22%3EPHP+Extension%3C%2Fa%3E+%2819%29%3Cbr+%2F%3E%0A%09%3Ca+href%3D%22http%3A%2F%2Fwww.laruence.com%2Fcategory%2Fphp-usage%22+title%3D%22View+all+posts+filed+under+PHP%E5%BA%94%E7%94%A8%22%3EPHP%E5%BA%94%E7%94%A8%3C%2Fa%3E+%28171%29%3Cbr+%2F%3E%0A%09%3Ca+href%3D%22http%3A%2F%2Fwww.laruence.com%2Fcategory%2Fphp-internal%22+title%3D%22PHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%2C+Zend%E5%86%85%E6%A0%B8%E8%A7%A3%E6%9E%90%22%3EPHP%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%3C%2Fa%3E+%2880%29%3Cbr+%2F%3E%0A%09%3Ca+href%3D%22http%3A%2F%2Fwww.laruence.com%2Fcategory%2F%25e8%25bd%25ac%25e8%25bd%25bd%22+title%3D%22View+all+posts+filed+under+%E8%BD%AC%E8%BD%BD%22%3E%E8%BD%AC%E8%BD%BD%3C%2Fa%3E+%2832%29%3Cbr+%2F%3E%0A%09%3Ca+href%3D%22http%3A%2F%2Fwww.laruence.com%2Fcategory%2Fnotes%22+title%3D%22View+all+posts+filed+under+%E9%9A%8F%E7%AC%94%22%3E%E9%9A%8F%E7%AC%94%3C%2Fa%3E+%2893%29%3Cbr+%2F%3E%0A");widget_so2460791.write("wpcumuluswidgetcontent4757780");</script>	        </div><div class="sidebarboxbottom"><img src="http://www.laruence.com/wp-content/themes/googlechrome/images/sidebarbottom.gif" alt="sidebarbottom" /></div>		<div class="sidebarboxtop"><img src="http://www.laruence.com/wp-content/themes/googlechrome/images/sidebartop.gif" alt="sidebartop" /></div><div class="sidebarbox"><h3>friends</h3>
+	<ul class='xoxo blogroll'>
+<li><a href="http://www.80sec.com/" title="安全界牛人">80Sec</a></li>
+<li><a href="http://www.54chen.com" target="_blank">cc0cc</a></li>
+<li><a href="http://www.cnxct.com">CFC4N</a></li>
+<li><a href="http://demon.at/">Demon</a></li>
+<li><a href="http://hi.baidu.com/erik168" target="_blank">Errorrik</a></li>
+<li><a href="http://glemir.xplore.cn" target="_blank">glemir&#8217;s</a></li>
+<li><a href="http://blog.iterse.com/" target="_blank">Iterse&#039;s BLOG</a></li>
+<li><a href="http://www.skiyo.cn/" target="_blank">Jessica</a></li>
+<li><a href="http://blog.zoeey.org/">moxie</a></li>
+<li><a href="http://pplxh.cublog.cn">pplxh</a></li>
+<li><a href="http://www.rainx.cn/" rel="friend" target="_blank">rainX</a></li>
+<li><a href="http://blog.libssh2.org/" rel="contact" target="_blank">Sara Golemon</a></li>
+<li><a href="http://www.chenbin.net/" target="_blank">siko</a></li>
+<li><a href="http://stauren.net" title="js牛人" target="_blank">stauren</a></li>
+<li><a href="http://www.blankyao.cn" rel="friend" target="_blank">Think in code</a></li>
+<li><a href="http://www.pureisle.net" target="_blank">三江小渡</a></li>
+<li><a href="http://icyriver.net" title="卫斯理" target="_blank">冰的河</a></li>
+<li><a href="http://liuqingyan.blogspot.com/" target="_blank">刘青炎</a></li>
+<li><a href="http://www.sunqinglin.cn" title="孙清林博客" target="_blank">孙清林博客</a></li>
+<li><a href="http://songshenzong.com" title="Nothing" target="_blank">宋神宗</a></li>
+<li><a href="http://keyvalue.net/">思考的Pyt</a></li>
+<li><a href="http://www.yanbin.org/" rel="contact" target="_blank">抚琴居</a></li>
+<li><a href="http://www.wangxuntian.com/" target="_blank">王洛堇</a></li>
+<li><a href="http://xiezhenye.com/" target="_blank">神仙</a></li>
+<li><a href="http://blog.csdn.net/heiyeshuwu" rel="friend" target="_blank">黑夜路人</a></li>
+
+	</ul>
+</div><div class="sidebarboxbottom"><img src="http://www.laruence.com/wp-content/themes/googlechrome/images/sidebarbottom.gif" alt="sidebarbottom" /></div>
+<div class="sidebarboxtop"><img src="http://www.laruence.com/wp-content/themes/googlechrome/images/sidebartop.gif" alt="sidebartop" /></div><div class="sidebarbox"><h3>Visitor ClustrMaps</h3>			<div class="textwidget"><a href="http://www4.clustrmaps.com/counter/maps.php?url=http://www.laruence.com" id="clustrMapsLink"><img src="http://www4.clustrmaps.com/counter/index2.php?url=http://www.laruence.com" style="border:0px;" alt="Locations of visitors to this page" title="Locations of visitors to this page" id="clustrMapsImg" onerror="this.onerror=null; this.src='http://www2.clustrmaps.com/images/clustrmaps-back-soon.jpg'; document.getElementById('clustrMapsLink').href='http://www2.clustrmaps.com';" />
+</a></div>
+		</div><div class="sidebarboxbottom"><img src="http://www.laruence.com/wp-content/themes/googlechrome/images/sidebarbottom.gif" alt="sidebarbottom" /></div>    </div>
+</div> <!-- container -->
+<div class="footerpush"></div>
+</div> <!--wrapper -->
+<div class='footer'>
+	<div class="footercontent">
+	&copy; <a href="http://www.laruence.com" title="Home">风雪之隅</a>/ <a href="http://www.php.net" target="_blank"><img src="http://www.laruence.com/wp-content/themes/googlechrome/images/php_logo.png" /></a>/ <a href=http://www.miibeian.gov.cn target=_blank>京ICP备15032766号</a>/ Theme By <a href="http://ericulous.com/2008/09/09/wp-theme-google-chrome" title="Smashing Wordpress Themes">Smashing</a>/ <span class="dia">由<a href="http://sae.sina.com.cn" target="_blank"><img src="http://static.sae.sina.com.cn/image/poweredby/117X12px.gif" title="Powered by Sina App Engine" /></a>提供稳定空间及带宽保障&nbsp;</span> </div>
+ </div>
+    </div>
+</div>
+<script type='text/javascript' src='http://www.laruence.com/wp-content/plugins/sem-subscribe-me/js/scripts.js?ver=20090906'></script>
+
+<script type="text/javascript">
+
+syntaxHilite();
+
+function syntaxHilite() {
+	var tab = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+	var codes = document.getElementsByTagName("pre");
+
+	sh_highlightDocument();
+
+	for(var i = 0; i < codes.length; i++) {
+		if(codes[i].getAttribute("name") != "code") {
+			continue;
+		}
+
+		var orig = codes[i].innerHTML;
+		var nextline = "";
+		var output = "";
+		var lineBeginning = true;
+
+		for(var j = 0; j < orig.length; j++) {
+			var nextChar = orig.charAt(j);
+
+			if(nextChar == '\r' || nextChar == '\n' || (j + 1) == orig.length ) {
+				if(nextChar == '\r' && (j + 1) <= orig.length && orig.charAt(j + 1) == '\n') {
+					j++;
+				}
+
+				if(nextline.length < 1) {
+					nextline = "&nbsp;";
+				}
+
+				output += '<li>' + nextline + '</li>';
+				nextline = "";
+				lineBeginning = true;
+			} else {
+				if(nextChar == '\t') {
+					nextline += tab;
+				}
+				else if(nextChar == ' ' && lineBeginning == true) {
+					nextline += "&nbsp;";
+				} else {
+					lineBeginning = false;
+					nextline += nextChar;
+				}
+			}
+		}
+
+		output = "<ol>" + output + '</ol>';
+		codes[i].innerHTML = output;
+	}
+}
+
+</script>
+<script type="text/javascript">
+//<![CDATA[
+var si_captcha_styles = "\
+<!-- begin SI Captcha Anti-Spam - comment form style -->\
+<style type='text/css'>\
+div#captchaImgDiv { display:block; }\
+div#captchaSizeDivSmall { width:175px; height:45px; padding-top:10px; }\
+div#captchaSizeDivLarge { width:250px; height:60px; padding-top:10px; }\
+img#si_image_com,#si_image_reg,#si_image_log { border-style:none; margin:0; padding-right:5px; float:left; }\
+img#captchaImgAudio { border-style:none; margin:0; vertical-align:top; }\
+img#captchaImgRefresh { border-style:none; margin:0; vertical-align:bottom; }\
+div#captchaInputDiv { display:block; padding-top:15px; padding-bottom:5px; }\
+label#captcha_code_label { margin:0; }\
+input#captcha_code { width:65px; }\
+</style>\
+<!-- end SI Captcha Anti-Spam - comment form style -->\
+";
+jQuery(document).ready(function($) {
+$('head').append(si_captcha_styles);
+});
+//]]>
+</script>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1258711828'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1258711828' type='text/javascript'%3E%3C/script%3E"));</script>
+</body>
+</html>

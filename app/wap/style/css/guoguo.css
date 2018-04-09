@@ -1,0 +1,173 @@
+.aui-login-l .btn-reg {
+    display: block;
+    background: #5dbf45;
+    width: 100%;
+    border-radius: 2px;
+    height: 44px;
+    text-align: center;
+    color: #fff;
+}
+#jsEditUserBtn {
+    display: block;
+    background: #ff7119;
+    width: 100%;
+    border-radius: 2px;
+    height: 44px;
+    text-align: center;
+    color: #fff;
+}
+.dialog {
+    position: fixed;
+    color: #7c7c7c;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    display: none;
+    z-index: 9999;
+}
+
+.bg, .dialog .bg, .dialog1 .bg, .dialog2 .bg {
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: .5;
+    filter: Alpha(opacity=50);
+    display: none;
+
+}
+.dialog{
+    background-color:rgba(0,0,0,0.5);
+}
+.dialogbox {
+    position: relative;
+    width: 80%;
+    min-height: 200px;
+    padding: 15px;
+    margin: 80px auto;
+    background: #fff;
+    overflow:hidden;
+    display: none;
+    margin-top: auto;
+}
+
+.dialogbox h1 {
+    color: #333;
+    height: 30px;
+    line-height: 18px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.dialogbox .close {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    cursor: pointer;
+}
+
+.dialogbox .cont {
+    width: 340px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.dialogbox .box {
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    border: 1px solid #ccc;
+    margin: 15px 0;
+    border-radius: 3px;
+    position: relative;
+}
+
+.dialogbox .box.disabled {
+    display: none;
+}
+
+.dialogbox .box.focus, .dialogbox .box.error, .dialogbox .valcode.error {
+    border-color: #6ec558;
+    box-shadow: 0 0 5px #6ec558;
+}
+
+.dialogbox .box.blur, .dialogbox .valcode.blur {
+    border-color: #ccc;
+}
+
+.dialogbox .box.errorput, .coninform .errorput input, .dialogbox .valcode.errorput input {
+    border-color: #f00;
+    box-shadow: 0 0 5px #aa0b0b;
+}
+
+.coninform .rightput {
+    background: url(../images/check.png) no-repeat 440px center;
+}
+
+#jsCompanyInfoForm .rightput {
+    background: url(../images/check.png) no-repeat 500px center;
+}
+
+.dialogbox .error {
+    background: #fb8344;
+    color: #fff !important;
+    text-align: center;
+    height: 40px !important;
+    line-height: 40px !important;
+    margin: 20px 0;
+    display: none;
+}
+
+.dialogbox .login-form-tips {
+    margin: 0;
+}
+
+.dialogbox .box span {
+    color: #7c7c7c;
+    border-right: 1px solid #ccc;
+    width: 80px;
+    height: 20px;
+    line-height: 20px;
+    margin-top: 12px;
+    text-align: center;
+    display: block;
+}
+
+.dialogbox .word3 {
+    letter-spacing: 4px;
+}
+
+.dialogbox .word2 {
+}
+
+.dialogbox .box input {
+    width: 235px;
+    padding: 10px;
+    line-height: 24px;
+    border: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.successbox .cont {
+    background: url(../images/check2.png) no-repeat 0 center;
+    background-size: 30%;
+    display: table;
+    width: auto;
+    height: 199px;
+    padding: 0;
+}
+.successbox .cont h2 {
+    display: table-cell;
+    font-size: 18px;
+    margin-top: 25px;
+    padding-left: 60px;
+    vertical-align: middle;
+    line-height: 25px;
+}
