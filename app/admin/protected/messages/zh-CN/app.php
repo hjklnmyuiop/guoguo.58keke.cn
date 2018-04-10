@@ -1,0 +1,67 @@
+<?php 
+/**
+* @Copyright (C) 2015
+* @Author  Alisa 
+* @Version  1.0
+*/
+return [
+    'captcha' => '验证码错误！',
+    'error'   => '抱歉，操作有误!',
+    'success' => '恭喜，操作成功！',
+    'fail'    => '操作失败，请重试！', 
+    'hasArticle' => '栏目下有文章，不允许删除！',
+    'hasSon'     => '栏目下有子栏目，不允许删除！',
+    'hasForum'     => '栏目下有论坛，不允许删除！',
+    'hasGoods'     => '品牌下有产品，不允许删除！',
+    
+    
+//     'uploadSuccess' => '上传成功！',
+//     'typeIdEmpty'   => '商品分类不能为空！',
+//     'emptyPassword' => '密码不能为空！',
+//     'qrPassword'    => '两次密码不一致！',
+//     'passwordError' => '密码不能包含除字母/数字/下划线/破折号以外的其他字符！',
+//     'lengthPassword' => '密码长度6-12位！',
+//     'sendError'     => '已发货，请不要重复发货！',
+//     'sendNumError'  => '发货数量有误！',
+//     'noBack'        => '商品未申请退货！',
+//     'backFinish'    => '申请已处理！',
+//     'noRow'         => '记录不存在！',
+//     'selectSendGood' => '请选择发货商品',
+//     'noSendGood'    => '订单已全部发货!',
+//     'phoneEmpty'    => '用户手机号为空，请先完善！',
+//     'phonemsgEmpty' => '短信内容不能为空！',
+//     'phoneError'    => '手机号格式错误！',
+//     'emailError'    => '邮箱格式有误！',
+//     'groupidEmpty'  => '角色组不能为空！',
+//     'logisticsEmpty' => '请先进入系统设置填写物流类型！',
+//     'moneyEmpty'    => '金额不能为空',
+//     'actionEmpty'   => '备注不能为空',
+
+//     'adminId' => '管理员ID',
+//     'uid'     => '用户ID',
+//     'account' => '账号',
+//     'username' => '姓名',
+//     'doing'    => '操作内容',
+//     'id'       => 'ID',
+//     'cate_id'  => '栏目ID',
+//     'title'    => '标题',
+//     'goodsName' => '商品名称',
+//     'goodsPrice' => '商品价格',
+//     'goodsNum'   => '商品库存',
+//     'goodsBuy'   => '商品销量',
+//     'username'   => '用户名',
+//     'proxy_code' => '邀请码',
+//     'name'       => '姓名',
+//     'email'      => '邮箱',
+//     'phone'      => '手机号',
+//     'number'     => '订单号',
+// 	'companyname'     => '公司名称',
+// 	'legalperson'     => '法人',
+// 	'contactphone'     => '联系人',
+//     'goodName'   => '商品名称',
+//     'send'       => '发货',
+//     'closeOrder' => '后台关闭订单',
+//     'sending'    => '配货中',
+//     'content'    => '内容',
+];
+?>
