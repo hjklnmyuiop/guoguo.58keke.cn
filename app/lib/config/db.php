@@ -4,9 +4,9 @@ namespace lib\config;
 return [
 		//主数据库配置
 		'class' => 'yii\db\Connection',
-		'dsn' => 'mysql:host=47.96.23.158;dbname=guoguo.58keke.cn',
+		'dsn' => 'mysql:host=47.96.23.108;dbname=guoguo.58keke.cn',
 		'username' => 'root',
-		'password' => 'ce9d5c8169',
+		'password' => '12333',
 		'charset' => 'utf8',
 		'tablePrefix' => 'hd_',
 		//从数据库配置
